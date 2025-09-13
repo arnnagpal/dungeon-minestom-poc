@@ -1,7 +1,7 @@
 # NOT FOR PRODUCTION USE`
 
 # Preview
-![preview](https://cdn.discordapp.com/attachments/621238453761474562/1416542297302110239/in-game.gif?ex=68c73951&is=68c5e7d1&hm=cf6b8228072682247da2d52f3b36e1543ad3401c022e14306e6fae1755b655ad&)
+![preview](preview/in-game-compressed.gif)
 
 # Commands
 | Command                                                                                             | Description                                                            |
