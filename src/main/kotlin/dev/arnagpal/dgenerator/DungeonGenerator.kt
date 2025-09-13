@@ -47,7 +47,6 @@ val mainInstance: Instance by lazy {
 }
 
 fun main() {
-    // Initialization
     val minecraftServer = MinecraftServer.init(Auth.Online())
     SchedulerManager.buildShutdownTask { println("Server closed") }
 
@@ -57,7 +56,6 @@ fun main() {
 
     GlobalEventHandler.addListener(AsyncPlayerConfigurationEvent::class.java) { event: AsyncPlayerConfigurationEvent ->
         val player = event.player
-        // Set the player's view distance to 8 chunks
         event.spawningInstance = mainInstance
         player.respawnPoint = Pos(0.0, 42.0, 0.0)
     }
@@ -91,7 +89,6 @@ fun main() {
         }
     } as Command)
 
-    // Start the server on port 25565
     minecraftServer.start("0.0.0.0", 25565)
 }
 

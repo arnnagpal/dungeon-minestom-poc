@@ -29,7 +29,6 @@ class DungeonLayout(
 
     fun addRoom(room: Room) {
         rooms.add(room)
-        // Carve out room
         for (x in room.x until room.x + room.width) {
             for (y in room.y until room.y + room.height) {
                 setTile(x, y, DungeonTile.FLOOR)

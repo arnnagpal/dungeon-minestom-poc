@@ -62,19 +62,15 @@ class DungeonBuilder(private val algorithm: BSPGenerator = BSPGenerator()) {
     ): DungeonBuildResult {
         val startTime = System.currentTimeMillis()
 
-        // Adjust config to fit within bounds
         val adjustedConfig = config.copy(
             width = bounds.width,
             height = bounds.height
         )
 
-        // Generate the dungeon layout
         val layout = algorithm.generate(adjustedConfig)
 
-        // Clear the area first
         clearArea(instance, bounds)
 
-        // Build the dungeon
         // show debug squares
         for (room in layout.rooms) {
             for (player in instance.players) {
@@ -152,49 +148,48 @@ class DungeonBuilder(private val algorithm: BSPGenerator = BSPGenerator()) {
 
         when (tile) {
             DungeonTile.WALL -> {
-                // Fill entire column with wall blocks
                 for (y in floorY..ceilingY) {
-//                    instance.setBlock(worldX, y, worldZ, tile.block)
+//                    instance.setBlock(worldX, y, worldZ, tile.block) // commented to make walls invisible for debugging
                     blocksPlaced++
                 }
             }
 
             DungeonTile.FLOOR -> {
-                // Floor
+                // floor
                 instance.setBlock(worldX, floorY, worldZ, tile.block)
                 blocksPlaced++
 
-                // Ceiling
+                // ceiling
                 if (ceilingY > floorY) {
                     instance.setBlock(worldX, ceilingY, worldZ, Block.GLASS) // to see inside for debug
                     blocksPlaced++
                 }
 
-                // Air in between
+                // air in between
                 for (y in floorY + 1 until ceilingY) {
                     instance.setBlock(worldX, y, worldZ, Block.AIR)
                 }
             }
 
             DungeonTile.CORRIDOR -> {
-                // Floor (different block than rooms)
+                // floor (different block than rooms)
                 instance.setBlock(worldX, floorY, worldZ, tile.block)
                 blocksPlaced++
 
-                // Ceiling
+                // ceiling
                 if (ceilingY > floorY) {
                     instance.setBlock(worldX, ceilingY, worldZ, Block.WHITE_STAINED_GLASS)
                     blocksPlaced++
                 }
 
-                // Air in between
+                // air in between
                 for (y in floorY + 1 until ceilingY) {
                     instance.setBlock(worldX, y, worldZ, Block.AIR)
                 }
             }
 
             DungeonTile.AIR -> {
-                // Just air (shouldn't happen normally)
+                // just air (shouldn't happen normally)
                 for (y in floorY..ceilingY) {
                     instance.setBlock(worldX, y, worldZ, Block.AIR)
                 }
